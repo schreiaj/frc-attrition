@@ -1,6 +1,6 @@
 # FRC Attrition Data
 
-I created this at the reqest of Michael Corsetto to look into the impact that the district system has on team sustainability. Included is a list of teams in each year ([1992–2015]) in the file `teams.csv` It was created based off the Mark McLeod's data set. 
+I created this at the reqest of Michael Corsetto to look into the impact that the district system has on team sustainability. Included is a list of teams in each year ([1992–2016]) in the file `teams.csv` It was created based off the Mark McLeod's data set. 
 
 ## Output
 ![](plot.png)
