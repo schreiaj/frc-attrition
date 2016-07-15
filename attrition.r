@@ -46,6 +46,6 @@ retention<- p + geom_line(size=1.06, linejoin="mitre") + scale_x_continuous(brea
 ggsave("plot.png", plot=retention, height=5, width=10)
 
 retention + annotate("text", x=anno$year, y=anno$y, label=anno$label, size=3, hjust=-0.05) + annotate("point", x=anno$year, y=anno$y, shape=21) 
-ggsave("annoted-retention.png", height=5, width=10)
+ggsave("annotated-retention.png", height=5, width=10)
 
 
