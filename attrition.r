@@ -38,3 +38,5 @@ p <- ggplot(districts, mapping = aes(years,attrition.pct, col=factor))
 
 
 p +geom_point() + geom_line(size=1.06, linejoin="mitre") + scale_x_continuous(breaks = seq(2006,2015)) + theme_fivethirtyeight() + scale_color_tableau()+ xlab(label = "Year") +ylab(label="Attrition %") + theme(legend.title=element_blank())
+
+ggsave("plot.png", height=5, width=10)
