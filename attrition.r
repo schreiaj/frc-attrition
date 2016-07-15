@@ -50,7 +50,20 @@ anno <- read.csv("annotations.csv")
 retention + annotate("text", x=anno$year, y=anno$y, label=anno$label, size=3, hjust=-0.05) + annotate("point", x=anno$year, y=anno$y, shape=21) 
 ggsave("annotated-retention.png", height=5, width=10)
 
-retention <- districts[c("factor", "years", "attrition.pct")]
+
+regions = c("AL", "AK", "AS", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "GU", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MH", "MA", "MI", "FM", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "MP", "OH", "OK", "OR", "PW", "PA", "PR", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "VI", "WA", "WV", "WI", "WY")
+us_teams <- filter(teams,Year>=2004, Locale %in% regions)
+
+
+
+losses = compute_losses(us_teams)
+for(locale in regions){
+  losses <- rbind(losses, compute_losses(filter(us_teams, Locale==locale), locale))
+}
+
+
+
+retention <- losses[c("factor", "years", "attrition.pct")]
 colnames(retention) <- c("region", "year", "pct_retained")
 write.csv(retention, file = "retention.csv")
 
