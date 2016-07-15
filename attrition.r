@@ -21,7 +21,7 @@ years <- seq(2006, 2016)
 
 compute_losses <- function(teams_sub, factor="ALL")
   data.frame(factor=factor, years=years, 'attrition pct'=sapply(years, function(year) 
-    lost_percent(teams_sub, year)*100)
+    100-lost_percent(teams_sub, year)*100)
   )
 
 
@@ -30,13 +30,16 @@ districts <- rbind(
   compute_losses(filter(teams, Locale=='DE' | Locale=='NJ' | Locale=='PA'), 'MAR'),
   compute_losses(filter(teams, Locale=='CT' | Locale=='MA' | Locale=='ME' | Locale=='VT' | Locale=='NH'), 'NE'),
   compute_losses(filter(teams, Locale=='MI'), 'MI'),
-  compute_losses(filter(teams, Locale=='IN'), 'IN'),
+  #compute_losses(filter(teams, Locale=='IN'), 'IN'),
+  compute_losses(filter(teams, Locale=='MD' | Locale=='VA' | Locale=='DC'), 'CHS'),
+  #compute_losses(filter(teams, Locale=='GA'), 'GA'),
+  #compute_losses(filter(teams, Locale=='NC'), 'NC'),
   compute_losses(teams, 'ALL')
 )
 
 p <- ggplot(districts, mapping = aes(years,attrition.pct, col=factor))
 
 
-p +geom_point() + geom_line(size=1.06, linejoin="mitre") + scale_x_continuous(breaks = years) + theme_fivethirtyeight() + scale_color_tableau()+ xlab(label = "Year") +ylab(label="Attrition %") + theme(legend.title=element_blank())
+p +geom_point() + geom_line(size=1.06, linejoin="mitre") + scale_x_continuous(breaks = years) + scale_y_continuous(breaks=seq(0,100)) + theme_fivethirtyeight() + scale_color_tableau()+ xlab(label = "Year") +ylab(label="Retention %") + theme(legend.title=element_blank())
 
 ggsave("plot.png", height=5, width=10)

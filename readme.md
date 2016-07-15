@@ -5,6 +5,9 @@ I created this at the reqest of Michael Corsetto to look into the impact that th
 ## Output
 ![](plot.png)
 
+#### Reading
+This is a plot of the retention percentages for each year ([2005–2016]). Higher is better. 
+
 
 ## Running
 There's an included R script included (`attrition.r`) that will generate a plot of team attritions in various regions. 
