@@ -17,3 +17,8 @@ There's an included R script included (`attrition.r`) that will generate a plot 
 - Team Merges - 47/65 merging into 51 is included as attrition. It's a small enough percentage of instances that rather than trying (and failing) to remove all instances of this, I just left it in.
 - Temporary Drops - Events like the Canadian Teacher Strike caused teams to drop out a year, honestly, it's too much work to track and special case all of that. Again, likely, within noise.
 
+### Annotations
+
+I've created an annotations file that tries to allow for annotating the retention plot with relvant events. I haven't figured out how to automate placement on the Y Axis, for now just alternate 100 and 99. The script will pick up the annotations and add it to the annoted retention plot (shown below) Please note, the ONLY change in this plot is the annotations, any changes you make in the unannoted one will reflect in the annotated one. 
+
+![](annotated-retention.png)

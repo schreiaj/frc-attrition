@@ -17,7 +17,7 @@ teams <- read.csv2(team_data_path)
 teams$Locale <- trim(teams$Locale) 
 
 
-years <- seq(2006, 2016)
+years <- seq(2005, 2016)
 
 compute_losses <- function(teams_sub, factor="ALL")
   data.frame(factor=factor, years=years, 'attrition pct'=sapply(years, function(year) 
@@ -40,6 +40,12 @@ districts <- rbind(
 p <- ggplot(districts, mapping = aes(years,attrition.pct, col=factor))
 
 
-p +geom_point() + geom_line(size=1.06, linejoin="mitre") + scale_x_continuous(breaks = years) + scale_y_continuous(breaks=seq(0,100)) + theme_fivethirtyeight() + scale_color_tableau()+ xlab(label = "Year") +ylab(label="Retention %") + theme(legend.title=element_blank())
+retention<- p + geom_line(size=1.06, linejoin="mitre") + scale_x_continuous(breaks = years) + scale_y_continuous(breaks=seq(0,100)) + theme_fivethirtyeight() + scale_color_tableau()+ xlab(label = "Year") +ylab(label="Retention %") + theme(legend.title=element_blank())
 
-ggsave("plot.png", height=5, width=10)
+
+ggsave("plot.png", plot=retention, height=5, width=10)
+
+retention + annotate("text", x=anno$year, y=anno$y, label=anno$label, size=3, hjust=-0.05) + annotate("point", x=anno$year, y=anno$y, shape=21) 
+ggsave("annoted-retention.png", height=5, width=10)
+
+
