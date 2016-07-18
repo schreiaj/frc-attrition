@@ -43,7 +43,7 @@ p <- ggplot(districts, mapping = aes(years,attrition.pct, col=factor))
 retention<- p + geom_line(size=1.06, linejoin="mitre") + scale_x_continuous(breaks = years) + scale_y_continuous(breaks=seq(0,100)) + theme_fivethirtyeight() + scale_color_tableau()+ xlab(label = "Year") +ylab(label="Retention %") + theme(legend.title=element_blank())
 
 
-ggsave("images/district_rentention.png", plot=retention, height=5, width=10)
+ggsave("images/district_retention", plot=retention, height=5, width=10)
 
 anno <- read.csv("data/annotations.csv")
 
@@ -51,7 +51,9 @@ retention + annotate("text", x=anno$year, y=anno$y, label=anno$label, size=3, hj
 ggsave("images/annotated_district_retention.png", height=5, width=10,)
 
 
-michigan <- p + geom_line(size=1, linejoin="mitre", color="gray", alpha=0.4) + scale_x_continuous(breaks = years) + scale_y_continuous(breaks=seq(0,100)) + theme_fivethirtyeight() + scale_color_tableau()+ xlab(label = "Year") +ylab(label="Retention %") + theme(legend.title=element_blank()) + ylim(80,100) + geom_line(data=filter(districts, factor=='MI'), color="orange", size=1.06) + geom_vline(xintercept = c(2009,2011), color="orange", size=.75, linetype=2)
+m <- ggplot(districts, mapping = aes(years,attrition.pct, group=factor))
+michigan <-m + geom_line(size=1, linejoin="mitre", color="gray", alpha=0.4) + scale_x_continuous(breaks = years) + scale_y_continuous(breaks=seq(0,100)) + theme_fivethirtyeight() + scale_color_tableau()+ xlab(label = "Year") +ylab(label="Retention %") + theme(legend.title=element_blank()) + ylim(80,100) + geom_line(data=filter(districts, factor=='MI'), color="orange", size=1.06)
+ggsave("images/michigan_retention.png", height=5, width=10,)
 
 
 
