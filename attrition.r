@@ -76,10 +76,10 @@ for(locale in regions){
   losses <- rbind(losses, compute_losses(filter(us_teams, Locale==locale), locale))
 }
 
-
+min = 5
 losses$lower = losses$attrition.pct -  min*scale(losses$team.count, center = 0)
 losses$upper = losses$attrition.pct +  min*scale(losses$team.count, center = 0)
-min = 5
+
 
 ggplot(losses[losses$factor!='ALL',]) + geom_ribbon(mapping=aes(ymin=lower, ymax=upper, x=years, y=attrition.pct, group=factor), fill="blue", alpha=0.3) + facet_wrap(facets="factor") + theme_fivethirtyeight() + scale_color_tableau()+ xlab(label = "Year") +ylab(label="Retention %") + theme(legend.title=element_blank()) + coord_cartesian(ylim=c(80,100)) + geom_line(mapping=aes(years, attrition.pct), col="blue")
 ggsave("images/all_retention_with_teams.png", height=12, width=12)
