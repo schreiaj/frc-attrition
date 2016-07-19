@@ -13,7 +13,7 @@ lost_teams = function(teams, year){
 
 # Compute percentage loss for teams
 lost_percent <- function(teams, year)
-  length(setdiff(filter(teams, Year==year-1)$X., filter(teams, Year==year)$X.))/length(filter(teams, Year==year)$X.)
+  length(setdiff(filter(teams, Year==year-1)$X., filter(teams, Year==year)$X.))/max(length(filter(teams, Year==year)$X.),1)
 
 # Let's import teams
 
