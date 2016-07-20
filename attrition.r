@@ -18,7 +18,7 @@ lost_percent <- function(teams, year)
 # Let's import teams
 
 
-teams <- read.csv2(team_data_path)
+teams <- read.csv(team_data_path)
 # Some weirdness with Locales having spaces before/after, let's make life easier
 teams$Locale <- trim(teams$Locale) 
 teams$X. = sapply(teams$X., function(x) as.numeric(x))
