@@ -24,7 +24,7 @@ teams$Locale <- trim(teams$Locale)
 teams$X. = sapply(teams$X., function(x) as.numeric(x))
 
 
-years <- seq(2005, 2016)
+years <- seq(2005, 2015)
 
 compute_losses <- function(teams_sub, factor="ALL")
   data.frame(factor=factor, years=years, 'attrition pct'=sapply(years, function(year) 
@@ -90,4 +90,11 @@ colnames(retention) <- c("region", "year", "pct_retained", "teams")
 write.csv(retention, file = "data/retention.csv")
 
 
+
+
+teams %>% group_by(X.) %>% summarize(founded=min(Year)) -> team_founded
+team_founded$founded = as.numeric(team_founded$founded)
+
+(inner_join(teams, team_founded)) %>% filter(Year>=2005) %>% ggplot() + geom_histogram(mapping=aes(x=founded), bins = 25) + theme_fivethirtyeight() + scale_color_tableau()+ xlab(label = "Year") +ylab(label="Number of Teams Remining From") + facet_wrap(facet="Year")
+ggsave("images/age_dist_over_time.png", height=5, width=5)
 
