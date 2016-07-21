@@ -95,6 +95,6 @@ write.csv(retention, file = "data/retention.csv")
 teams %>% group_by(X.) %>% summarize(founded=min(Year)) -> team_founded
 team_founded$founded = as.numeric(team_founded$founded)
 
-(inner_join(teams, team_founded)) %>% filter(Year>=2005) %>% ggplot() + geom_histogram(mapping=aes(x=founded), bins = 25) + theme_fivethirtyeight() + scale_color_tableau()+ xlab(label = "Year") +ylab(label="Number of Teams Remining From") + facet_wrap(facet="Year")
+(inner_join(teams, team_founded)) %>% filter(Year>=2005&Year<2016) %>% ggplot() + geom_histogram(mapping=aes(x=founded), bins = 24) + theme_fivethirtyeight() + scale_color_tableau()+ xlab(label = "Year") +ylab(label="Number of Teams Remining From") + facet_wrap(facet="Year")
 ggsave("images/age_dist_over_time.png", height=5, width=5)
 
