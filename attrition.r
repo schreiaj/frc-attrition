@@ -24,7 +24,7 @@ teams$Locale <- trim(teams$Locale)
 teams$X. = sapply(teams$X., function(x) as.numeric(x))
 
 
-years <- seq(2005, 2015)
+years <- seq(2005, 2016)
 
 compute_losses <- function(teams_sub, factor="ALL")
   data.frame(factor=factor, years=years, 'attrition pct'=sapply(years, function(year) 
@@ -38,11 +38,11 @@ districts <- rbind(
   compute_losses(filter(teams, Locale=='DE' | Locale=='NJ' | Locale=='PA'), 'MAR'),
   compute_losses(filter(teams, Locale=='CT' | Locale=='MA' | Locale=='ME' | Locale=='VT' | Locale=='NH'), 'NE'),
   compute_losses(filter(teams, Locale=='MI'), 'MI'),
-  #compute_losses(filter(teams, Locale=='IN'), 'IN'),
+  compute_losses(filter(teams, Locale=='IN'), 'IN'),
   compute_losses(filter(teams, Locale=='MD' | Locale=='VA' | Locale=='DC'), 'CHS'),
-  #compute_losses(filter(teams, Locale=='GA'), 'GA'),
+  compute_losses(filter(teams, Locale=='GA'), 'GA'),
   #compute_losses(filter(teams, Locale=='MN'), 'MN'),
-  #compute_losses(filter(teams, Locale=='NC'), 'NC')
+  compute_losses(filter(teams, Locale=='NC'), 'NC'),
   compute_losses(teams, 'ALL')
 )
 
@@ -95,6 +95,6 @@ write.csv(retention, file = "data/retention.csv")
 teams %>% group_by(X.) %>% summarize(founded=min(Year)) -> team_founded
 team_founded$founded = as.numeric(team_founded$founded)
 
-(inner_join(teams, team_founded)) %>% filter(Year>=2005&Year<2016) %>% ggplot() + geom_histogram(mapping=aes(x=founded), bins = 24) + theme_fivethirtyeight() + scale_color_tableau()+ xlab(label = "Year") +ylab(label="Number of Teams Remining From") + facet_wrap(facet="Year")
+(inner_join(teams, team_founded)) %>% filter(Year>=2005&Year<2018) %>% ggplot() + geom_histogram(mapping=aes(x=founded), bins = 24) + theme_fivethirtyeight() + scale_color_tableau()+ xlab(label = "Year") +ylab(label="Number of Teams Remining From") + facet_wrap(facet="Year")
 ggsave("images/age_dist_over_time.png", height=5, width=5)
 
